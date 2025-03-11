@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,5 @@ Route::middleware('auth:sanctum')->group(function() {
         return $request->user();
     });
 });
+
+// Route::resource('tags', TagController::class)->middleware(['auth:sanctum','can:show-tag']);
