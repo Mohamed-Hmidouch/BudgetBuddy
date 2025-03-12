@@ -5,12 +5,18 @@ namespace App\Models\Api;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TagModel extends Model
+class Expense extends Model
 {
     use HasFactory;
+
+    protected $table = 'expense';
+
     protected $fillable = [
         'name',
+        'amount',
         'user_id',
+        'date',
+        'description',
     ];
 
     public function user()
@@ -18,9 +24,9 @@ class TagModel extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function expenses()
+    public function tags()
     {
-        return $this->belongsToMany(ExpenseModel::class, 'expense_tag', 
-            'tag_model_id', 'expense_model_id');
+        return $this->belongsToMany(Tag::class, 'tag_expense', 
+            'expense_id', 'tag_id');
     }
 }

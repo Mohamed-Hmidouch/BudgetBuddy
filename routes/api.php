@@ -28,4 +28,5 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 });
 
-// Route::resource('tags', TagController::class)->middleware(['auth:sanctum','can:show-tag']);
+
+Route::resource('tag', TagController::class)->middleware(['auth:sanctum']);

@@ -52,12 +52,12 @@ class User extends Authenticatable
     
     public function tags()
     {
-        return $this->hasMany('App\Models\Api\TagModel');
+        return $this->hasMany('App\Models\Api\Tag');
     }
 
-    public function posts()
+    public function Expense()
     {
-        return $this->hasMany('App\Models\Api\PostModel');
+        return $this->hasMany('App\Models\Api\Expense');
     }
 
     public function permissions()

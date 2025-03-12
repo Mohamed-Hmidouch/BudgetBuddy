@@ -1,32 +1,36 @@
 <?php
 namespace App\Services;
-
+use App\Models\Api\Tag;
 class TagService
 {
 
-    public function create($data)
-    {
-        return auth()->user()->tags()->create($data);
-    }
-
-    public function update($tag, $data)
-    {
-        $tag->update($data);
-        return $tag;
-    }
-
-    public function delete($tag)
-    {
-        $tag->delete();
-    }
-
     public function getTags()
     {
-        return auth()->user()->tags;
+        return Tag::all();
+    }
+    public function getTag($id)
+    {
+        return Tag::find();
+    }
+    
+    public function createTag($data)
+    {
+        return Tag::create($data);
     }
 
-    public function getTag($tag)
+    public function updateTag($id,$data)
     {
+        $tag = $this->getTag($id);
+        $tag->update($data);
+        $tag->save();
         return $tag;
+    }
+    public function delete($id)
+    {
+        $tag = $this->getTag($id);
+        TagDetail::where('tag_id',$id)->delete();
+        Review::where('tag_id',$id);
+        $tag->imagable->delete();
+        $tag->delete();
     }
 }

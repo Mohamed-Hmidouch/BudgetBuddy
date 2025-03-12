@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expense', function (Blueprint $table) {
+        Schema::create('tag_expense', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('amount',10,2);
-            $table->unsignedBigInteger('user_id');
-            $table->date('date');
-            $table->string('description')->nullable();
+            $table->foreignId('tag_id')->constrained('tag')->onDelete('cascade');
+            $table->foreignId('expense_id')->constrained('expense')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expense');
+        Schema::dropIfExists('tag_expense');
     }
 };
