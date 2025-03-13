@@ -31,9 +31,10 @@ class TagController extends BaseController
        return $this->sendResponse($response,true,201);
         }
 
-    public function delete(User $user,Tag $tag)
+    public function destroy($id)
     {
-
+       $this->tagService->delete($id);
+    return $this->sendResponse('Tag deleted successfully', true, 200);
     }
 
     public function update($id,UpdateTagValidator $updateTagValidator)

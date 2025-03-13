@@ -28,9 +28,9 @@ class TagService
     public function delete($id)
     {
         $tag = $this->getTag($id);
-        TagDetail::where('tag_id',$id)->delete();
-        Review::where('tag_id',$id);
-        $tag->imagable->delete();
+        if($tag->imagable){
+                    $tag->imagable->delete();
+        }
         $tag->delete();
     }
 }
