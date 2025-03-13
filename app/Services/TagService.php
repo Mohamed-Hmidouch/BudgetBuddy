@@ -10,7 +10,7 @@ class TagService
     }
     public function getTag($id)
     {
-        return Tag::find();
+        return Tag::find($id);
     }
     
     public function createTag($data)

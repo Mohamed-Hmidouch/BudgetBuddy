@@ -6,10 +6,9 @@ use Log;
 use App\Models\User;
 use App\Models\Api\Tag;
 use App\Services\TagService;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Requests\Tags\CreateTagValidator;
+use App\Requests\Tags\UpdateTagValidator;
 
 class TagController extends BaseController
 {
@@ -37,8 +36,15 @@ class TagController extends BaseController
 
     }
 
-    public function update()
+    public function update($id,UpdateTagValidator $updateTagValidator)
     {
-        
+        if(!empty($updateTagValidator->getErrors()))
+        {
+            return $this->sendResponse($updateTagValidator->getErrors(),false,406);
+        }
+       $data = $updateTagValidator->request()->all();
+       $data['user_id']=Auth::user()->id;
+       $response = $this->tagService->updateTag($id,$data);
+       return $this->sendResponse($response,true,201);
     }
 }
