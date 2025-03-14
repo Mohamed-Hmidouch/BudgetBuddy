@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tag API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tag": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Créer un nouveau tag",
+                "operationId": "7691d6cc41bc1cb0e2e60beae42b2b44",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "example_tag"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag créé avec succès"
+                    },
+                    "406": {
+                        "description": "Erreurs de validation"
+                    }
+                }
+            }
+        },
+        "/api/tag/{id}": {
+            "put": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Mettre à jour un tag",
+                "operationId": "136a6d25ad8f7d4e9409b189bf3056e3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "updated_tag"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag mis à jour avec succès"
+                    },
+                    "406": {
+                        "description": "Erreurs de validation"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Supprimer un tag",
+                "operationId": "c2dcd332dedb831fce6e2840bb27b628",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tag supprimé avec succès"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tags",
+            "description": "Tags"
+        }
+    ]
+}
